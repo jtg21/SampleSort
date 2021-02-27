@@ -99,23 +99,3 @@ def clearDir(dirName):
 			path = MUSIC_DIR + file
 			shutil.rmtree(path)
 
-
-def main():
-	
-	isNewDir = input("Are you creating a fresh sort? (y / n): ")
-	if (isNewDir == "y"):
-		samples = getListOfFiles(SPLICE_DIR)
-		sortSamples(samples, True)
-	else:
-		dirPath = input("What is the directory you would like to sort?: ")
-		try:
-			samples = getListOfFiles(dirPath)
-			sortSamples(samples, False)
-		except:
-			print("Sorry that wasn't a valid directory!")
-			main()
-	#sortByKey("vocal")
-
-
-main()
-
