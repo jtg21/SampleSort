@@ -1,3 +1,4 @@
+from persistance import *
 import os, shutil
 import re
 
@@ -7,6 +8,20 @@ KEYWORDS = ["kick", "snare", "hihat", "loop", "synth", "fx",
 			"vox", "build", "vocal", "brass", "trap", "808", "riser", "break", 
 			"clap", "snap", "tom", "crash", "ride", "percussion", "block", 
 			"bass", "lead", "whitenoise", "reverse", "chop", "clock", "sample"]
+
+
+#Given a directory fetch all of the audio files from the sub directorys
+def sortSamples(dirName, newdir):
+
+	#Fetch keywords to sort by
+	KEYWORDS = fetchKeywords()
+
+	#Fetch samples
+	samples = getListOfFiles(dirName)
+	#Create the directories contain types of samples based on name
+	createGroups(samples, newdir)
+
+
 
 def getListOfFiles(dirName):
     # create a list of file and sub directories 
@@ -27,7 +42,7 @@ def getListOfFiles(dirName):
     return allFiles
 
 # pass a list of all the sample strings
-def sortSamples(samples, newdir):
+def createGroups(samples, newdir):
 	total_count = 0
 
 	if (newdir):
@@ -99,3 +114,7 @@ def clearDir(dirName):
 			path = MUSIC_DIR + file
 			shutil.rmtree(path)
 
+#Starter save to keywords persistance
+def startPersist():
+	storeKeywords(KEYWORDS)
+	print(fetchKeywords())
